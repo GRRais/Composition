@@ -124,7 +124,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_option_6"
         tools:text="6" />
-    апрап
+    апрапfdfdfdfh
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
