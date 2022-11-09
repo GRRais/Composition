@@ -34,7 +34,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@android:color/holo_green_light"
-        android:text="@string/test_mode"
+        android:text="@string/level_easy"
         />
 
     <Button
@@ -44,7 +44,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@android:color/holo_orange_light"
-        android:text="@string/test_mode"
+        android:text="@string/level_normal"
         />
 
     <Button
@@ -54,7 +54,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@android:color/holo_red_light"
-        android:text="@string/test_mode"
+        android:text="@string/level_hard"
         />
 
 </LinearLayout>
