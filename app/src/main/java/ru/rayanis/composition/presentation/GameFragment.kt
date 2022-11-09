@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import ru.rayanis.composition.R
 import ru.rayanis.composition.databinding.FragmentChooseLevelBinding
 import ru.rayanis.composition.databinding.FragmentGameBinding
+import ru.rayanis.composition.domain.entity.GameResult
+import ru.rayanis.composition.domain.entity.GameSettings
 import ru.rayanis.composition.domain.entity.Level
 
 class GameFragment : Fragment() {
@@ -31,6 +33,20 @@ class GameFragment : Fragment() {
         return b.root
     }
 
+    override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
+        super.onViewCreated(view , savedInstanceState)
+        b.tvOption1.setOnClickListener {
+            launchGameFinishedFragment(
+                GameResult(
+                true,
+                0,
+                0,
+                GameSettings(0,0,0,0)
+            )
+            )
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _b = null
@@ -38,6 +54,13 @@ class GameFragment : Fragment() {
 
     private fun parseArgs() {
         level = requireArguments().getSerializable(KEY_LEVEL) as Level
+    }
+
+    fun launchGameFinishedFragment(gameResult: GameResult) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.main_container, GameFinishedFragment.newInstance(gameResult))
+            .addToBackStack(null)
+            .commit()
     }
 
     companion object {
