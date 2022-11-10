@@ -1,10 +1,12 @@
 package ru.rayanis.composition.presentation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import ru.rayanis.composition.R
 import ru.rayanis.composition.databinding.FragmentGameBinding
 import ru.rayanis.composition.domain.entity.GameResult
@@ -14,6 +16,23 @@ import ru.rayanis.composition.domain.entity.Level
 class GameFragment : Fragment() {
 
     private lateinit var level: Level
+    private val viewModel by lazy {
+        ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
+        )[GameViewModel::class.java]
+    }
+
+    private val tvOptions by lazy {
+        mutableListOf<TextView>().apply {
+            add(b.tvOption1)
+            add(b.tvOption2)
+            add(b.tvOption3)
+            add(b.tvOption4)
+            add(b.tvOption5)
+            add(b.tvOption6)
+        }
+    }
 
     private var _b: FragmentGameBinding? = null
     private val b: FragmentGameBinding
@@ -34,15 +53,13 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
-        b.tvOption1.setOnClickListener {
-            launchGameFinishedFragment(
-                GameResult(
-                true,
-                0,
-                0,
-                GameSettings(0,0,0,0)
-            )
-            )
+        observeViewModel()
+    }
+
+    private fun observeViewModel() {
+        viewModel.question.observe(viewLifecycleOwner) {
+            b.tvSum.text = it.sum.toString()
+            b.tvLeftNumber.text = it.visibleNumber.toString()
         }
     }
 
