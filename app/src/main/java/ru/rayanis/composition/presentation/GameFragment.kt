@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ru.rayanis.composition.R
-import ru.rayanis.composition.databinding.FragmentChooseLevelBinding
 import ru.rayanis.composition.databinding.FragmentGameBinding
 import ru.rayanis.composition.domain.entity.GameResult
 import ru.rayanis.composition.domain.entity.GameSettings
@@ -53,10 +52,12 @@ class GameFragment : Fragment() {
     }
 
     private fun parseArgs() {
-        level = requireArguments().getSerializable(KEY_LEVEL) as Level
+        requireArguments().getParcelable<Level>(KEY_LEVEL)?.let {
+            level = it
+        }
     }
 
-    fun launchGameFinishedFragment(gameResult: GameResult) {
+    private fun launchGameFinishedFragment(gameResult: GameResult) {
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.main_container, GameFinishedFragment.newInstance(gameResult))
             .addToBackStack(null)
@@ -66,11 +67,12 @@ class GameFragment : Fragment() {
     companion object {
 
         private const val KEY_LEVEL = "level"
+        const val NAME = "GameFragment"
 
         fun newInstance(level: Level): GameFragment {
             return GameFragment().apply {
                 arguments = Bundle().apply {
-                    putSerializable(KEY_LEVEL, level)
+                    putParcelable(KEY_LEVEL, level)
                 }
             }
         }
