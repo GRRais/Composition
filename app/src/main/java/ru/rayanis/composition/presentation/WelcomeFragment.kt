@@ -12,18 +12,18 @@ class WelcomeFragment : Fragment() {
 
     private var _b: FragmentWelcomeBinding? = null
     private val b: FragmentWelcomeBinding
-    get() = _b ?: throw RuntimeException("FragmentWelcomeBinding == null")
+        get() = _b ?: throw RuntimeException("FragmentWelcomeBinding == null")
 
     override fun onCreateView(
-        inflater: LayoutInflater , container: ViewGroup? ,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _b = FragmentWelcomeBinding.inflate(inflater, container, false)
         return b.root
     }
 
-    override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
-        super.onViewCreated(view , savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         b.buttonUnderstand.setOnClickListener {
             launchChooseLevelFragment()
         }
