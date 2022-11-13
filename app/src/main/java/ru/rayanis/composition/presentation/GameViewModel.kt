@@ -19,7 +19,7 @@ import ru.rayanis.composition.domain.usecases.GetGameSettingsUseCase
 class GameViewModel(
     private val application: Application,
     private val level: Level
-) : ViewModel(application) {
+) : ViewModel() {
 
     private lateinit var gameSettings: GameSettings
 
